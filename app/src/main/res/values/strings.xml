@@ -3,4 +3,8 @@
     <string name="login">Login</string>
     <string name="btn_login">Log in</string>
     <string name="field_is_empty">заполните поле</string>
+    <string name="payment_id">Payment ID: %s</string>
+    <string name="payment_title">Payment Title: %s</string>
+    <string name="payment_amount">Payment Amount: %s</string>
+    <string name="payment_created_at">Payment Created at: %s</string>
 </resources>

@@ -40,7 +40,7 @@ class PaymentFragment : Fragment(R.layout.fragment_payment) {
         viewModel.getPayments()
         viewModel.payment.observe(viewLifecycleOwner) {
             println(it.size)
-            recycler.adapter = PaymentAdapter(it)
+            recycler.adapter = PaymentAdapter(requireContext(), it)
         }
         val menuHost: MenuHost = requireActivity()
 

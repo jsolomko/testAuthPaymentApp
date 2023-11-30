@@ -1,13 +1,17 @@
 package com.example.authpaymentapplication.app.ui.payment
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.authpaymentapplication.R
 import com.example.authpaymentapplication.app.model.payment.Payment
 import com.example.authpaymentapplication.databinding.ItemPaymentBinding
 
 class PaymentAdapter(
+    val context: Context,
     private val payments: List<Payment>
 ) : RecyclerView.Adapter<PaymentAdapter.PaymentViewHolder>() {
     class PaymentViewHolder(val binding: ItemPaymentBinding) : ViewHolder(binding.root)
@@ -18,13 +22,14 @@ class PaymentAdapter(
         return PaymentViewHolder(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: PaymentViewHolder, position: Int) {
         val payment = payments[position]
         with(holder.binding) {
-            textViewId.text = payment.id.toString()
-            textViewTitle.text = payment.title
-            textViewAmount.text = payment.amount.toString()
-            textViewCreated.text = payment.created.toString()
+            textViewId.text = context.getString(R.string.payment_id, payment.id.toString())
+            textViewTitle.text = context.getString(R.string.payment_title, payment.title)
+            textViewAmount.text =  context.getString(R.string.payment_amount, payment.amount)
+            textViewCreated.text =context.getString(R.string.payment_created_at, payment.created)
         }
 
     }
