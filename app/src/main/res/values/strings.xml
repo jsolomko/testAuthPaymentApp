@@ -2,4 +2,5 @@
     <string name="app_name">AuthPayment Application</string>
     <string name="login">Login</string>
     <string name="btn_login">Log in</string>
+    <string name="field_is_empty">заполните поле</string>
 </resources>

@@ -1,7 +1,5 @@
 package com.example.authpaymentapplication.app.utils
 
-import android.os.Message
-
 open class AppException : RuntimeException {
     constructor() : super()
     constructor(cause: Throwable) : super(cause)
@@ -9,14 +7,13 @@ open class AppException : RuntimeException {
 }
 
 class InvalidCredentialsException(cause: Exception) : AppException(cause = cause)
-class EmptyFieldException(field: Field) : AppException()
+class EmptyFieldException(val field: Field) : AppException()
 class ParseBackendResponseException(cause: Throwable) : AppException(cause = cause)
-class AppConnectionException(cause: Throwable) : AppException(cause)
 class PasswordMismatchException : AppException()
 class ConnectionException(cause: Throwable) : AppException(cause)
 class BackendException(
+    message: String,
     val code: Int,
-    message: String
 ) : AppException(message)
 
 enum class Field {

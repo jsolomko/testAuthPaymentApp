@@ -5,21 +5,26 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.authpaymentapplication.app.Singletons
 import com.example.authpaymentapplication.app.model.auth.AuthRepository
-import com.example.authpaymentapplication.app.utils.ConnectionException
-import com.example.authpaymentapplication.app.utils.EmptyFieldException
-import com.example.authpaymentapplication.app.utils.InvalidCredentialsException
-import com.example.authpaymentapplication.app.utils.share
+import com.example.authpaymentapplication.app.utils.*
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val authRepository: AuthRepository = Singletons.authRepository
 ) : ViewModel() {
 
-    private val _navigateToPayment = MutableLiveData<Boolean>()
+    private val _state = MutableLiveData(State())
+    val state = _state.share()
+
+    private val _navigateToPayment = MutableLiveData<Boolean>(false)
     val navigateToPayment = _navigateToPayment.share()
+
+    private val _showAuthErrorToastEvent = MutableLiveData<String>()
+    val showAuthToastEvent = _showAuthErrorToastEvent.share()
 
     private var _auth = MutableLiveData<Boolean>()
     val auth = _auth.share()
+    private val _showConnectionErrorToastEvent = MutableLiveData<String>()
+    val showConnectionErrorToastEvent = _showConnectionErrorToastEvent.share()
 
     fun login(login: String, password: String) {
         viewModelScope.launch {
@@ -39,19 +44,34 @@ class LoginViewModel(
     }
 
     private fun processConnectionException(e: ConnectionException) {
-        TODO("Not yet implemented")
+        showConnectionErrorToast()
     }
 
     private fun processInvalidCredentialsException() {
-        TODO("Not yet implemented")
+        showAuthErrorToast()
     }
 
     private fun processEmptyFieldException(e: EmptyFieldException) {
-        TODO("Not yet implemented")
+        _state.value = _state.value?.copy(
+            emptyLoginError = e.field == Field.Login,
+            emptyPasswordError = e.field == Field.Password
+        )
+    }
+
+    private fun showAuthErrorToast() {
+        _showAuthErrorToastEvent.value = "Неверный логин или пароль"
+    }
+
+    private fun showConnectionErrorToast() {
+        _showConnectionErrorToastEvent.value = "Ошибка соединения"
     }
 
     private fun launchPaymentScreen() {
         _navigateToPayment.value = true
     }
 
+    data class State(
+        val emptyLoginError: Boolean = false,
+        val emptyPasswordError: Boolean = false,
+    )
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,13 +22,41 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.btnLogin.setOnClickListener {
-            val login = binding.editLogin.text
-            val password = binding.editPassword.text
-            viewModel.login(Auth(login.toString(), password.toString()))
-            findNavController().navigate(R.id.action_loginFragment_to_paymentFragment)
+            onLoginButtonPressed()
         }
 
+        observeState()
+        observeNavigateToTabsEvent()
+        observeShowAuthErrorMessageEvent()
+        observeShowConnectionErrorMessageEvent()
         return binding.root
     }
 
+    private fun onLoginButtonPressed() {
+        val login = binding.editLogin.text
+        val password = binding.editPassword.text
+        viewModel.login(login.toString(), password.toString())
+    }
+
+    private fun observeState() = viewModel.state.observe(viewLifecycleOwner) {
+        binding.textInpitLogin.error =
+            if (it.emptyLoginError) getString(R.string.field_is_empty) else null
+        binding.textInputPaassword.error =
+            if (it.emptyPasswordError) getString(R.string.field_is_empty) else null
+    }
+
+    private fun observeShowAuthErrorMessageEvent() =
+        viewModel.showAuthToastEvent.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
+
+    private fun observeShowConnectionErrorMessageEvent() =
+        viewModel.showConnectionErrorToastEvent.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
+
+    private fun observeNavigateToTabsEvent() =
+        viewModel.navigateToPayment.observe(viewLifecycleOwner) {
+            if (it) findNavController().navigate(R.id.action_loginFragment_to_paymentFragment)
+        }
 }
