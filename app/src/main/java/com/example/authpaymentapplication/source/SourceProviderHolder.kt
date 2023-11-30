@@ -6,6 +6,7 @@ import com.example.authpaymentapplication.app.model.SourceProvider
 import com.example.authpaymentapplication.app.setting.AppSettings
 import com.example.authpaymentapplication.source.base.RetrofitConfig
 import com.example.authpaymentapplication.source.base.RetrofitSourceProvider
+import com.example.authpaymentapplication.source.payment.PaymentDTO
 import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -17,7 +18,8 @@ object SourceProviderHolder {
 
 
     val retrofitSourceProvider: SourceProvider by lazy {
-        val moshi = Moshi.Builder().build()
+        val moshi = Moshi.Builder()
+            .build()
         val config = RetrofitConfig(
             creteRetrofit(moshi), moshi
         )
@@ -48,8 +50,8 @@ object SourceProviderHolder {
         return Interceptor { chain ->
             val newBuilder = chain.request().newBuilder()
             val token = appSettings.getCurrentToken()
-            newBuilder.addHeader("app-key","12345")
-            newBuilder.addHeader("v","1")
+            newBuilder.addHeader("app-key", "12345")
+            newBuilder.addHeader("v", "1")
             if (token != null) {
                 newBuilder.addHeader("token", "$token")
             }

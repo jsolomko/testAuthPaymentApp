@@ -1,12 +1,28 @@
 package com.example.authpaymentapplication.app.utils
 
-class AppException : RuntimeException()
+import android.os.Message
 
-class EmptyFieldException(
-    e: String
-) : RuntimeException(e)
+open class AppException : RuntimeException {
+    constructor() : super()
+    constructor(cause: Throwable) : super(cause)
+    constructor(message: String) : super(message)
+}
 
-enum class Field{
+class InvalidCredentialsException(cause: Exception) : AppException(cause = cause)
+class EmptyFieldException(field: Field) : AppException()
+class ParseBackendResponseException(cause: Throwable) : AppException(cause = cause)
+class AppConnectionException(cause: Throwable) : AppException(cause)
+class PasswordMismatchException : AppException()
+class ConnectionException(cause: Throwable) : AppException(cause)
+class BackendException(
+    val code: Int,
+    message: String
+) : AppException(message)
+
+enum class Field {
     Login,
     Password
 }
+
+
+

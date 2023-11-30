@@ -4,5 +4,5 @@ import retrofit2.http.GET
 
 interface PaymentApi {
     @GET("payments")
-   suspend fun getPayments(): PaymentResponse
+    suspend fun getPayments(): PaymentResponse
 }

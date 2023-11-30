@@ -29,7 +29,8 @@
                 android:id="@+id/editLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="login" />
+                android:hint="login"
+                android:text="demo"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -41,6 +42,7 @@
                 android:id="@+id/editPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="12345"
                 android:hint="password" />
         </com.google.android.material.textfield.TextInputLayout>
 

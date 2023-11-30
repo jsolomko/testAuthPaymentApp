@@ -21,8 +21,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         binding.btnLogin.setOnClickListener {
-            viewModel.login(Auth("demo", "12345"))
-            findNavController().navigate(R.id.paymentFragment)
+            val login = binding.editLogin.text
+            val password = binding.editPassword.text
+            viewModel.login(Auth(login.toString(), password.toString()))
+            findNavController().navigate(R.id.action_loginFragment_to_paymentFragment)
         }
 
         return binding.root
