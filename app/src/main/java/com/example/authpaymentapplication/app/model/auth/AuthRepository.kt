@@ -26,4 +26,10 @@ class AuthRepository(
         }
         settings.setCurrentToken(token.token)
     }
+
+
+
+    fun logout() {
+        settings.setCurrentToken(null)
+    }
 }
