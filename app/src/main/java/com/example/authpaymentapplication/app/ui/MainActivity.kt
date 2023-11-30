@@ -2,6 +2,10 @@ package com.example.authpaymentapplication.app.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import androidx.core.view.MenuProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import androidx.navigation.ui.AppBarConfiguration
@@ -28,10 +32,13 @@ class MainActivity : AppCompatActivity() {
                     R.id.loginFragment
                 )
             )
+
         setupActionBarWithNavController(navController!!, appBarConfiguration)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController?.navigateUp() ?: super.onSupportNavigateUp()
     }
+
+
 }

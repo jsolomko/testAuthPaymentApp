@@ -14,7 +14,7 @@ class PaymentAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentViewHolder {
         val inflater = LayoutInflater.from(parent.getContext())
-        val binding = ItemPaymentBinding.inflate(inflater,parent,false)
+        val binding = ItemPaymentBinding.inflate(inflater, parent, false)
         return PaymentViewHolder(binding)
     }
 
