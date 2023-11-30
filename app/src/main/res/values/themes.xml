@@ -12,5 +12,17 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="TitleTextViewApp" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">32sp</item>
+        <item name="titleTextColor">@color/black</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="LinearApp">
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
 </resources>

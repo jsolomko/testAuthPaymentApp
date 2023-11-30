@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        style="@style/LinearApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -14,9 +15,10 @@
 
         <TextView
             android:id="@+id/textView"
+            style="@style/TitleTextViewApp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@string/login" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInpitLogin"
@@ -46,7 +48,7 @@
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="@string/btn_login" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

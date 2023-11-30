@@ -5,7 +5,7 @@ import com.example.authpaymentapplication.app.model.payment.Payment
 class PaymentDTO(
     val id: Int,
     val title: String,
-    val amount: Int,
+    val amount: Double,
     val created: Int
 ) {
     fun toPayment() = Payment(
@@ -17,6 +17,6 @@ class PaymentDTO(
 }
 
 class PaymentResponse(
-    val success: Boolean,
+    val success: String,
     val response: List<PaymentDTO>
 )
