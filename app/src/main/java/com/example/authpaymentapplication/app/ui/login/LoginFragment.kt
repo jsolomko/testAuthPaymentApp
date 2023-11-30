@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.authpaymentapplication.R
-import com.example.authpaymentapplication.app.model.auth.Auth
 import com.example.authpaymentapplication.app.utils.ViewModelFactory
 import com.example.authpaymentapplication.databinding.FragmentLoginBinding
 
@@ -26,7 +25,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
 
         observeState()
-        observeNavigateToTabsEvent()
+        observeNavigateToPaymentEvent()
         observeShowAuthErrorMessageEvent()
         observeShowConnectionErrorMessageEvent()
         return binding.root
@@ -55,7 +54,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
 
-    private fun observeNavigateToTabsEvent() =
+    private fun observeNavigateToPaymentEvent() =
         viewModel.navigateToPayment.observe(viewLifecycleOwner) {
             if (it) findNavController().navigate(R.id.action_loginFragment_to_paymentFragment)
         }
